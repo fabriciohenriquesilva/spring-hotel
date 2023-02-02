@@ -1,14 +1,7 @@
 package br.edu.iftm.hotel.spring.domain.veiculo;
 
-import br.edu.iftm.hotel.spring.domain.cliente.Cliente;
+public class VeiculoDto {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "veiculo")
-public class Veiculo {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String marca;
     private String modelo;
@@ -16,19 +9,7 @@ public class Veiculo {
     private String placa;
     private String vagaOcupada;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    private Cliente cliente;
-
-    public Veiculo() {
-    }
-
-    public Veiculo(VeiculoForm form) {
-        this.marca = form.getMarca();
-        this.modelo = form.getModelo();
-        this.cor = form.getCor();
-        this.placa = form.getPlaca();
-        this.vagaOcupada = form.getVagaOcupada();
+    public VeiculoDto() {
     }
 
     public Long getId() {
@@ -77,13 +58,5 @@ public class Veiculo {
 
     public void setVagaOcupada(String vagaOcupada) {
         this.vagaOcupada = vagaOcupada;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 }

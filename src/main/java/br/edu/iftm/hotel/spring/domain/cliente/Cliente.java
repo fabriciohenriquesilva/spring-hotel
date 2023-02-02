@@ -11,22 +11,22 @@ import java.util.List;
 @Table(name = "cliente")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipoCliente", length = 1, discriminatorType = DiscriminatorType.STRING)
-public class Cliente {
+public abstract class Cliente {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_residencial_id")
     private Endereco enderecoResidencial;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_comercial_id")
     private Endereco enderecoComercial;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Veiculo> veiculos = new ArrayList<>();
 
     private String telefoneFixo;
@@ -38,11 +38,19 @@ public class Cliente {
     public Cliente() {
     }
 
-    public long getId() {
+    public Cliente(ClienteForm form) {
+        this.nome = form.getNome();
+        this.tipoCliente = form.getTipoCliente();
+        this.telefoneCelular = form.getTelefoneCelular();
+        this.telefoneComercial = form.getTelefoneComercial();
+        this.telefoneFixo = form.getTelefoneFixo();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

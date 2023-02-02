@@ -1,42 +1,18 @@
 package br.edu.iftm.hotel.spring.domain.veiculo;
 
-import br.edu.iftm.hotel.spring.domain.cliente.Cliente;
+import javax.validation.constraints.NotNull;
 
-import javax.persistence.*;
+public class VeiculoForm {
 
-@Entity
-@Table(name = "veiculo")
-public class Veiculo {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotNull
     private String marca;
+    @NotNull
     private String modelo;
     private String cor;
     private String placa;
     private String vagaOcupada;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-    private Cliente cliente;
-
-    public Veiculo() {
-    }
-
-    public Veiculo(VeiculoForm form) {
-        this.marca = form.getMarca();
-        this.modelo = form.getModelo();
-        this.cor = form.getCor();
-        this.placa = form.getPlaca();
-        this.vagaOcupada = form.getVagaOcupada();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public VeiculoForm() {
     }
 
     public String getMarca() {
@@ -77,13 +53,5 @@ public class Veiculo {
 
     public void setVagaOcupada(String vagaOcupada) {
         this.vagaOcupada = vagaOcupada;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 }

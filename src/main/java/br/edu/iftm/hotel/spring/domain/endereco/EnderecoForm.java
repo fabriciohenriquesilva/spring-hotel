@@ -1,41 +1,22 @@
 package br.edu.iftm.hotel.spring.domain.endereco;
 
-import br.edu.iftm.hotel.spring.domain.municipio.Municipio;
+import javax.validation.constraints.NotNull;
 
-import javax.persistence.*;
+public class EnderecoForm {
 
-@Entity
-@Table(name = "endereco")
-public class Endereco {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotNull
     private String logradouro;
+    @NotNull
     private String numero;
+    @NotNull
     private String bairro;
-    @OneToOne
-    @JoinColumn(name = "municipio_id")
-    private Municipio municipio;
     private String complemento;
+    @NotNull
     private String cep;
+    @NotNull
+    private Long municipioId;
 
-    public Endereco() {
-    }
-
-    public Endereco(EnderecoForm form) {
-        this.logradouro = form.getLogradouro();
-        this.numero = form.getNumero();
-        this.bairro = form.getBairro();
-        this.complemento = form.getComplemento();
-        this.cep = form.getCep();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public EnderecoForm() {
     }
 
     public String getLogradouro() {
@@ -62,14 +43,6 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
-
     public String getComplemento() {
         return complemento;
     }
@@ -84,5 +57,13 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public Long getMunicipioId() {
+        return municipioId;
+    }
+
+    public void setMunicipioId(Long municipioId) {
+        this.municipioId = municipioId;
     }
 }

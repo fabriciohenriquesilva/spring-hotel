@@ -1,33 +1,18 @@
 package br.edu.iftm.hotel.spring.domain.endereco;
 
-import br.edu.iftm.hotel.spring.domain.municipio.Municipio;
+import br.edu.iftm.hotel.spring.domain.municipio.MunicipioDto;
 
-import javax.persistence.*;
+public class EnderecoDto {
 
-@Entity
-@Table(name = "endereco")
-public class Endereco {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String logradouro;
     private String numero;
     private String bairro;
-    @OneToOne
-    @JoinColumn(name = "municipio_id")
-    private Municipio municipio;
     private String complemento;
     private String cep;
+    private MunicipioDto municipio;
 
-    public Endereco() {
-    }
-
-    public Endereco(EnderecoForm form) {
-        this.logradouro = form.getLogradouro();
-        this.numero = form.getNumero();
-        this.bairro = form.getBairro();
-        this.complemento = form.getComplemento();
-        this.cep = form.getCep();
+    public EnderecoDto() {
     }
 
     public Long getId() {
@@ -62,14 +47,6 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
-
     public String getComplemento() {
         return complemento;
     }
@@ -84,5 +61,13 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public MunicipioDto getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(MunicipioDto municipio) {
+        this.municipio = municipio;
     }
 }

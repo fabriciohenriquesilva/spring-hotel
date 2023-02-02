@@ -1,17 +1,13 @@
-package br.edu.iftm.hotel.spring.domain.cliente;
+package br.edu.iftm.hotel.spring.domain.cliente.juridica;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import br.edu.iftm.hotel.spring.domain.cliente.ClienteForm;
 
-@Entity
-@DiscriminatorValue("J")
-public class PessoaJuridica extends Cliente {
+public class PessoaJuridicaForm extends ClienteForm {
 
     private String cnpj;
     private String nomeFantasia;
 
-    public PessoaJuridica() {
-        super();
+    public PessoaJuridicaForm() {
     }
 
     public String getCnpj() {
