@@ -1,6 +1,5 @@
 package br.edu.iftm.hotel.spring.domain.cliente.fisica;
 
-import br.edu.iftm.hotel.spring.domain.endereco.Endereco;
 import br.edu.iftm.hotel.spring.domain.endereco.EnderecoDto;
 import br.edu.iftm.hotel.spring.domain.veiculo.VeiculoDto;
 
@@ -20,6 +19,25 @@ public class PessoaFisicaDtoAnalitico {
     private String tipoCliente;
 
     public PessoaFisicaDtoAnalitico() {
+    }
+
+    public PessoaFisicaDtoAnalitico(PessoaFisica pessoaFisica) {
+        this.id = pessoaFisica.getId();
+        this.cpf = pessoaFisica.getCpf();
+        this.nome = pessoaFisica.getNome();
+
+        if(pessoaFisica.getEnderecoResidencial() != null) {
+            this.enderecoResidencial = new EnderecoDto(pessoaFisica.getEnderecoResidencial());
+        }
+
+        if(pessoaFisica.getEnderecoComercial() != null) {
+            this.enderecoComercial = new EnderecoDto(pessoaFisica.getEnderecoComercial());
+        }
+
+        this.telefoneFixo = pessoaFisica.getTelefoneFixo();
+        this.telefoneCelular = pessoaFisica.getTelefoneCelular();
+        this.telefoneComercial = pessoaFisica.getTelefoneComercial();
+        pessoaFisica.getVeiculos().forEach(v -> this.veiculos.add(new VeiculoDto(v)));
     }
 
     public Long getId() {

@@ -85,4 +85,22 @@ public class Endereco {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    public void atualizarDados(EnderecoForm form) {
+        if(form.getLogradouro() != null) {
+            this.logradouro = form.getLogradouro();
+        }
+        if(form.getNumero() != null) {
+            this.numero = form.getNumero();
+        }
+        if(form.getBairro() != null) {
+            this.bairro = form.getBairro();
+        }
+        if(form.getComplemento() != null) {
+            this.complemento = form.getComplemento();
+        }
+        if(form.getCep() != null) {
+            this.cep = form.getCep();
+        }
+    }
 }

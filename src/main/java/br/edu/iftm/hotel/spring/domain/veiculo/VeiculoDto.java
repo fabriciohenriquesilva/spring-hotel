@@ -12,6 +12,15 @@ public class VeiculoDto {
     public VeiculoDto() {
     }
 
+    public VeiculoDto(Veiculo veiculo) {
+        this.id = veiculo.getId();
+        this.marca = veiculo.getMarca();
+        this.modelo = veiculo.getModelo();
+        this.cor = veiculo.getCor();
+        this.placa = veiculo.getPlaca();
+        this.vagaOcupada = veiculo.getVagaOcupada();
+    }
+
     public Long getId() {
         return id;
     }

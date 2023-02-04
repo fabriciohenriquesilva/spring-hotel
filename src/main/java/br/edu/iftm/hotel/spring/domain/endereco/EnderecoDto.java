@@ -15,6 +15,16 @@ public class EnderecoDto {
     public EnderecoDto() {
     }
 
+    public EnderecoDto(Endereco enderecoResidencial) {
+        if (enderecoResidencial.getId() != null) this.id = enderecoResidencial.getId();
+        this.logradouro = enderecoResidencial.getLogradouro();
+        this.numero = enderecoResidencial.getNumero();
+        this.bairro = enderecoResidencial.getBairro();
+        this.complemento = enderecoResidencial.getComplemento();
+        this.cep = enderecoResidencial.getCep();
+        this.municipio = new MunicipioDto(enderecoResidencial.getMunicipio());
+    }
+
     public Long getId() {
         return id;
     }

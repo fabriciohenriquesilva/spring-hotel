@@ -18,11 +18,11 @@ public abstract class Cliente {
 
     private String nome;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_residencial_id")
     private Endereco enderecoResidencial;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_comercial_id")
     private Endereco enderecoComercial;
 
