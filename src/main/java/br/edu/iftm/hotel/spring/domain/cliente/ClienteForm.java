@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @JsonTypeInfo(
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
@@ -28,7 +29,7 @@ public abstract class ClienteForm {
     private String telefoneFixo;
     private String telefoneCelular;
     private String telefoneComercial;
-    private VeiculoForm veiculo;
+    private List<VeiculoForm> veiculos;
     @NotNull
     private EnderecoForm enderecoResidencial;
     private EnderecoForm enderecoComercial;
@@ -64,15 +65,7 @@ public abstract class ClienteForm {
     public void setTelefoneComercial(String telefoneComercial) {
         this.telefoneComercial = telefoneComercial;
     }
-
-    public VeiculoForm getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(VeiculoForm veiculo) {
-        this.veiculo = veiculo;
-    }
-
+    
     public EnderecoForm getEnderecoResidencial() {
         return enderecoResidencial;
     }
@@ -95,5 +88,13 @@ public abstract class ClienteForm {
 
     public void setTipoCliente(String tipoCliente) {
         this.tipoCliente = tipoCliente;
+    }
+
+    public List<VeiculoForm> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(List<VeiculoForm> veiculos) {
+        this.veiculos = veiculos;
     }
 }

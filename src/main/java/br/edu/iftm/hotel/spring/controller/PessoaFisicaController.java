@@ -1,6 +1,5 @@
 package br.edu.iftm.hotel.spring.controller;
 
-import br.edu.iftm.hotel.spring.domain.cliente.Cliente;
 import br.edu.iftm.hotel.spring.domain.cliente.fisica.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

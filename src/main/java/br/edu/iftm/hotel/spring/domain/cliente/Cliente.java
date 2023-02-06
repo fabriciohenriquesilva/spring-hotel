@@ -2,6 +2,7 @@ package br.edu.iftm.hotel.spring.domain.cliente;
 
 import br.edu.iftm.hotel.spring.domain.endereco.Endereco;
 import br.edu.iftm.hotel.spring.domain.veiculo.Veiculo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public abstract class Cliente {
     private Endereco enderecoComercial;
 
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Veiculo> veiculos = new ArrayList<>();
 
     private String telefoneFixo;

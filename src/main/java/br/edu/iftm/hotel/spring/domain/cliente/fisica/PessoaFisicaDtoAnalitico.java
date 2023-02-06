@@ -3,6 +3,7 @@ package br.edu.iftm.hotel.spring.domain.cliente.fisica;
 import br.edu.iftm.hotel.spring.domain.endereco.EnderecoDto;
 import br.edu.iftm.hotel.spring.domain.veiculo.VeiculoDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PessoaFisicaDtoAnalitico {
@@ -12,7 +13,7 @@ public class PessoaFisicaDtoAnalitico {
     private String cpf;
     private EnderecoDto enderecoResidencial;
     private EnderecoDto enderecoComercial;
-    private List<VeiculoDto> veiculos;
+    private List<VeiculoDto> veiculos = new ArrayList<>();
     private String telefoneFixo;
     private String telefoneCelular;
     private String telefoneComercial;
@@ -37,7 +38,10 @@ public class PessoaFisicaDtoAnalitico {
         this.telefoneFixo = pessoaFisica.getTelefoneFixo();
         this.telefoneCelular = pessoaFisica.getTelefoneCelular();
         this.telefoneComercial = pessoaFisica.getTelefoneComercial();
-        pessoaFisica.getVeiculos().forEach(v -> this.veiculos.add(new VeiculoDto(v)));
+
+        if(pessoaFisica.getVeiculos() != null && !pessoaFisica.getVeiculos().isEmpty()){
+            pessoaFisica.getVeiculos().forEach(v -> this.veiculos.add(new VeiculoDto(v)));
+        }
     }
 
     public Long getId() {

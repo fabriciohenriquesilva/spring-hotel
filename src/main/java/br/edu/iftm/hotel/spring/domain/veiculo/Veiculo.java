@@ -1,6 +1,7 @@
 package br.edu.iftm.hotel.spring.domain.veiculo;
 
 import br.edu.iftm.hotel.spring.domain.cliente.Cliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ public class Veiculo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JsonManagedReference
     private Cliente cliente;
 
     public Veiculo() {
