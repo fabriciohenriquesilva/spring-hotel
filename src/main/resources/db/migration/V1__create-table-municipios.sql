@@ -1,4 +1,4 @@
-CREATE TABLE municipio (
+CREATE TABLE IF NOT EXISTS municipio (
 
   id bigint not null auto_increment,
   nome varchar(100) not null,

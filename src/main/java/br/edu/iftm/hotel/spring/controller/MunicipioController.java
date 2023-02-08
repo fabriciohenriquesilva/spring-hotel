@@ -5,6 +5,9 @@ import br.edu.iftm.hotel.spring.domain.municipio.MunicipioDto;
 import br.edu.iftm.hotel.spring.domain.municipio.MunicipioForm;
 import br.edu.iftm.hotel.spring.domain.municipio.MunicipioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,8 +25,8 @@ public class MunicipioController {
     private MunicipioRepository repository;
 
     @GetMapping
-    public List<Municipio> listar() {
-        return repository.findAll();
+    public Page<MunicipioDto> listar(@PageableDefault Pageable paginacao) {
+        return repository.findAll(paginacao).map(MunicipioDto::new);
     }
 
     @PostMapping
@@ -43,7 +45,7 @@ public class MunicipioController {
     @GetMapping("/{id}")
     public ResponseEntity<MunicipioDto> consultar(@PathVariable Long id) {
         Optional<Municipio> optional = repository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             return ResponseEntity.ok(new MunicipioDto(optional.get()));
         }
         return ResponseEntity.notFound().build();
@@ -54,7 +56,7 @@ public class MunicipioController {
     public ResponseEntity<MunicipioDto> atualizar(@RequestBody @Valid MunicipioDto municipioDto) {
         Optional<Municipio> optional = repository.findById(municipioDto.getId());
 
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             Municipio municipio = optional.get();
             municipio.atualizarDados(municipioDto);
             return ResponseEntity.ok(new MunicipioDto(municipio));
