@@ -27,7 +27,7 @@ public abstract class Cliente {
     @JoinColumn(name = "endereco_comercial_id")
     private Endereco enderecoComercial;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Veiculo> veiculos = new ArrayList<>();
 
@@ -118,5 +118,18 @@ public abstract class Cliente {
 
     public void setTipoCliente(String tipoCliente) {
         this.tipoCliente = tipoCliente;
+    }
+
+    public void adicionarVeiculo(Veiculo veiculo) {
+        this.veiculos.add(veiculo);
+    }
+
+    public void removerVeiculo(Long id) {
+        Veiculo veiculo = this.veiculos.stream()
+                .filter(v -> v.getId() == id)
+                .findFirst()
+                .get();
+
+        this.veiculos.remove(veiculo);
     }
 }

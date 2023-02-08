@@ -1,6 +1,9 @@
 package br.edu.iftm.hotel.spring.controller;
 
 import br.edu.iftm.hotel.spring.domain.cliente.fisica.*;
+import br.edu.iftm.hotel.spring.domain.veiculo.Veiculo;
+import br.edu.iftm.hotel.spring.domain.veiculo.VeiculoForm;
+import br.edu.iftm.hotel.spring.domain.veiculo.VeiculoFormExclusao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +46,7 @@ public class PessoaFisicaController {
                     .buildAndExpand(pessoaFisica.getId())
                     .toUri();
 
-            return ResponseEntity.created(uri).body(pessoaFisica);
+            return ResponseEntity.created(uri).body(new PessoaFisicaDtoAnalitico(pessoaFisica));
         }
         return ResponseEntity.noContent().build();
     }
@@ -66,6 +69,37 @@ public class PessoaFisicaController {
     @Transactional
     public ResponseEntity remover(@PathVariable Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/veiculos")
+    @Transactional
+    public ResponseEntity adicionarVeiculo(@PathVariable Long id,
+                                           @Valid @RequestBody VeiculoForm veiculoForm,
+                                           UriComponentsBuilder uriBuilder) {
+
+        PessoaFisica pessoaFisica = repository.findById(id).get();
+        Veiculo veiculo = new Veiculo(veiculoForm);
+
+        pessoaFisica.adicionarVeiculo(veiculo);
+        veiculo.setCliente(pessoaFisica);
+
+        URI uri = uriBuilder
+                .path("/pessoas-fisicas/{id}")
+                .buildAndExpand(pessoaFisica.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(new PessoaFisicaDtoAnalitico(pessoaFisica));
+    }
+
+    @DeleteMapping("/{id}/veiculos")
+    @Transactional
+    public ResponseEntity removerVeiculo(@PathVariable Long id,
+                                         @Valid @RequestBody VeiculoFormExclusao veiculoFormExclusao) {
+
+        PessoaFisica pessoaFisica = repository.findById(id).get();
+        pessoaFisica.removerVeiculo(veiculoFormExclusao.getId());
+
         return ResponseEntity.noContent().build();
     }
 

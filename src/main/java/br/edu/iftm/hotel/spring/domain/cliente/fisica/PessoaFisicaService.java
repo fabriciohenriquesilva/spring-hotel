@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PessoaFisicaService {
@@ -47,12 +46,6 @@ public class PessoaFisicaService {
         Endereco enderecoResidencial = criarEndereco(form.getEnderecoResidencial());
         pessoaFisica.setEnderecoResidencial(enderecoResidencial);
 
-//        if (form.getVeiculos() != null) {
-//
-//            for(Veiculo veiculo : pessoaFisica.getVeiculos()){
-//                veiculo.setCliente(pessoaFisica);
-//            }
-//        }
         repository.save(pessoaFisica);
 
         return Optional.of(pessoaFisica);
